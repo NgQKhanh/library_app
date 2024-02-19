@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background"
+    android:textAlignment="center">
+
+    <TextView
+        android:id="@+id/signin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đăng nhập"
+        android:textColor="@color/white"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        android:layout_margin="50dp"
+        android:gravity="center" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/signin"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="#30ffffff"
+        android:drawableLeft="@drawable/login_icon_username"
+        android:drawablePadding="10dp"
+        android:hint="Tên đăng nhập"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/username"
+        android:background="#30ffffff"
+        android:hint="Mật khẩu"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:drawableLeft="@drawable/login_icon_password"
+        android:drawablePadding="10dp"/>
+
+    <Button
+        android:id="@+id/btnlogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password"
+        android:text="Đăng nhập"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:layout_margin="20dp"/>
+        />
+</RelativeLayout>
