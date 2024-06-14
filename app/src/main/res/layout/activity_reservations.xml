@@ -174,7 +174,7 @@
                         android:textSize="18dp"
                         android:layout_marginRight="20dp"
                         android:layout_marginLeft="20dp" />
-                    </LinearLayout>
+                </LinearLayout>
                 <!-- Xác nhận đặt chỗ -->
                 <Button
                     android:id="@+id/btnRsvnConfirm"

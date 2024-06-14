@@ -53,7 +53,7 @@
 
     <Button
         android:id="@+id/update_profile"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/email"
         android:text="Cập nhật thông tin"
@@ -65,13 +65,13 @@
 
     <Button
         android:id="@+id/update_password"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/update_profile"
         android:text="Đổi mật khẩu"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:textSize="18dp"
-        android:layout_margin="20dp"/>
+        />
     />
 </RelativeLayout>

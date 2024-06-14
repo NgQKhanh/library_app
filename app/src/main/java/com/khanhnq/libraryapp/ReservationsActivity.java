@@ -1,26 +1,17 @@
 package com.khanhnq.libraryapp;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
@@ -34,18 +25,19 @@ import com.khanhnq.libraryapp.api.ApiService;
 import com.khanhnq.libraryapp.model.getInfoPost;
 import com.khanhnq.libraryapp.model.infoResponse;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import com.khanhnq.libraryapp.component.CategoryAdapter;
+import com.khanhnq.libraryapp.component.Category;
 
 public class ReservationsActivity extends AppCompatActivity {
     ImageView btnBack;
@@ -89,7 +81,7 @@ public class ReservationsActivity extends AppCompatActivity {
         });
 
         // Bấm chọn kíp
-        categoryAdapter = new CategoryAdapter(this,R.layout.select_shift,getListCategory());
+        categoryAdapter = new CategoryAdapter(this,R.layout.select_shift,R.layout.category_shift,getListCategory());
         showShift.setAdapter(categoryAdapter);
         showShift.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -311,50 +303,11 @@ public class ReservationsActivity extends AppCompatActivity {
             return null;
         }
     }
-
     // Category
     private List<Category> getListCategory(){
         List<Category> list = new ArrayList<>();
         list.add(new Category("Kíp sáng"));
         list.add(new Category("Kíp chiều"));
         return list;
-    }
-    public class Category {
-        private String name;
-        public String getName() {
-            return name;
-        }
-        public void setName(String name) {
-            this.name = name;
-        }
-        public Category(String name) {
-            this.name = name;
-        }
-    }
-    public class CategoryAdapter extends ArrayAdapter<Category>{
-        public CategoryAdapter(@NonNull Context context, int resource, @NonNull List<Category> objects) {
-            super(context, resource, objects);
-        }
-        @NonNull
-        @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.select_shift,parent,false);
-            TextView tvSelected = convertView.findViewById(R.id.tv_selected);
-            Category category = this.getItem(position);
-            if(category != null){
-                tvSelected.setText(category.getName());
-            }
-            return convertView;
-        }
-        @Override
-        public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_shift,parent,false);
-            TextView tvCategory = convertView.findViewById(R.id.tv_category);
-            Category category = this.getItem(position);
-            if(category != null){
-                tvCategory.setText(category.getName());
-            }
-            return convertView;
-        }
     }
 }

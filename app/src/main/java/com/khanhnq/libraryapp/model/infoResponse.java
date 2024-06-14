@@ -9,9 +9,7 @@ public class infoResponse {
     // Lấy list sách đang mượn
     public class BBList {
         private List<BorrowedBook> borrowedBookList;
-        public List<BorrowedBook> getBorrowedBookList() {
-            return borrowedBookList;
-        }
+        public List<BorrowedBook> getBorrowedBookList() { return borrowedBookList; }
         public class BorrowedBook {
             private String bookName;
             private String borrowDate;
@@ -29,7 +27,7 @@ public class infoResponse {
     }
 
     //Lấy thông tin phòng đọc
-    public class RRInfo {
+    public static class RRInfo {
         private readingRoom readingRoom;
         public readingRoom getReadingRoom() {
             return readingRoom;
@@ -64,11 +62,50 @@ public class infoResponse {
         }
     }
 
-    // Confirm Reservation
+    // Xác nhận đặt chỗ
     public class confirmRsvn{
         private String status;
         public String getStatus() {
             return status;
+        }
+    }
+
+    // Tìm kiếm đầu sách
+    public class searchTitleList{
+        private List<searchTitle> list;
+
+        public List<searchTitle> getList() {return list;}
+
+        public class searchTitle{
+            private String id;
+            private String bookName;
+            private String author;
+            private String publisher;
+            private String category;
+
+            public String getId() { return id;}
+            public String getBookName() { return bookName;}
+            public String getAuthor() { return author; }
+            public String getPublisher() { return publisher; }
+            public String getCategory() { return category;}
+        }
+    }
+
+    // Tìm kiếm bản copy
+    public class searchCopyList{
+        private List<searchCopy> list;
+        public List<searchCopy> getList() {return list;}
+
+        public class searchCopy{
+            private String bookID;
+            private String status;
+            private String id;
+            private String location;
+
+            public String getBookId() { return bookID;}
+            public String getStatus() { return status; }
+            public String getId() { return id;}
+            public String getLocation() { return location; }
         }
     }
 }

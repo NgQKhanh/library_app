@@ -50,6 +50,8 @@ public class LoginActivity extends AppCompatActivity {
         // Lấy dữ liệu
         String username = etUsername.getText().toString();
         String password = etPassword.getText().toString();
+        username = "k";
+        password = "1";
         loginPost postData = new loginPost(username, password);
 
         // Gửi yêu cầu đăng nhập sử dụng Retrofit và ApiService

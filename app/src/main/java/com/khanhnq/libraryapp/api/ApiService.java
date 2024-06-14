@@ -13,6 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface ApiService {
     Gson gson = new GsonBuilder()
@@ -37,6 +38,17 @@ public interface ApiService {
     Call<infoResponse.RRInfo> getReadingRoomInfo ();
     @POST("delrsvn")
     Call<Void> delRsvn (@Body getInfoPost getInfopost);
+    @GET("search")
+    Call<infoResponse.searchTitleList> searchBook(
+            @Query("type") String type,
+            @Query("key") String key,
+            @Query("field") String field
+    );
+    @GET("search")
+    Call<infoResponse.searchCopyList> searchBookCopy(
+            @Query("type") String type,
+            @Query("id") String id
+    );
 }
 
 

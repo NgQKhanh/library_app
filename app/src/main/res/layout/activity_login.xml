@@ -27,27 +27,31 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:background="#30ffffff"
         android:drawableLeft="@drawable/login_icon_username"
         android:drawablePadding="10dp"
         android:hint="Tên đăng nhập"
         android:padding="10dp"
         android:textColor="@color/white"
-        android:textColorHint="@color/white" />
+        android:textColorHint="@color/white"
+        android:background="@drawable/search_search_bar"
+        android:backgroundTint="#30ffffff"
+        android:queryBackground="@android:color/transparent"/>
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/username"
-        android:background="#30ffffff"
         android:hint="Mật khẩu"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:layout_margin="10dp"
         android:padding="10dp"
         android:drawableLeft="@drawable/login_icon_password"
-        android:drawablePadding="10dp"/>
+        android:drawablePadding="10dp"
+        android:background="@drawable/search_search_bar"
+        android:backgroundTint="#30ffffff"
+        android:queryBackground="@android:color/transparent"/>
 
     <Button
         android:id="@+id/btnlogin"
