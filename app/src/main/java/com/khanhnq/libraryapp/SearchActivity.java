@@ -83,9 +83,7 @@ public class SearchActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String key) {
-                Log.d("Test Press","Press search button haha");
                 searchBook("title",key,searchField[selectedField]);
-                searchBookCopy("Copy","1");
                 return true;
             }
             @Override
@@ -117,7 +115,7 @@ public class SearchActivity extends AppCompatActivity {
                             String author = book.getAuthor();
                             String publisher = book.getPublisher();
                             String category = book.getCategory();
-                            Log.d("Debug search","Book Name: " + bookName);
+
                             bookList.add(new BookTitleList(id,bookName,author,category,publisher));
                         }
                         bookListAdapter = new BookListAdapter(SearchActivity.this,bookList);
@@ -146,35 +144,6 @@ public class SearchActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<infoResponse.searchTitleList> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
-    }
-
-    // HTTP Get: Tìm kiếm bản sách
-    public void searchBookCopy (String type,String id) {
-        ApiService.apiservice.searchBookCopy(type, id).enqueue(new Callback<infoResponse.searchCopyList>() {
-            @Override
-            public void onResponse(Call<infoResponse.searchCopyList> call, Response<infoResponse.searchCopyList> response) {
-                if (response.isSuccessful()) {
-                    infoResponse.searchCopyList list = response.body();
-                    if (list == null) {
-                        Toast.makeText(SearchActivity.this, "Không tìm thấy dữ liệu!", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        List<infoResponse.searchCopyList.searchCopy> searchList = list.getList();
-                        for (infoResponse.searchCopyList.searchCopy book : searchList) {
-                            String bookID = book.getBookId();
-                            String status = book.getStatus();
-                            String id = book.getId();
-                            String location = book.getLocation();
-                            Log.d("Debug search","Book ID: " + bookID);
-                        }
-                    }
-                }
-            }
-            @Override
-            public void onFailure(Call<infoResponse.searchCopyList> call, Throwable t) {
                 t.printStackTrace();
             }
         });

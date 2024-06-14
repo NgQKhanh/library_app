@@ -74,8 +74,20 @@
         android:textSize="16sp"
         android:id="@+id/publisher"/>
 
+    <!--    Thông báo -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Không tìm thấy dữ liệu"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:id="@+id/notification"
+        android:layout_marginTop="20dp"
+        android:gravity="center"/>
+
+    <!--    Bảng thông tin bản sách-->
     <TableLayout
-        android:id="@+id/reservationTable"
+        android:id="@+id/bookCopyTable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/text1"
@@ -85,6 +97,7 @@
 
         <!-- Table Heading -->
         <TableRow
+            android:id="@+id/tableId"
             android:background="@color/colorGreen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

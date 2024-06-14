@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <TextView
-        android:id="@+id/caption"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:padding="10dp"
-        android:text="Tìm kiếm theo: "/>
+    android:layout_height="wrap_content"
+    android:background="@drawable/search_search_bar">
 
     <TextView
         android:id="@+id/tv_selected"
-        android:layout_toEndOf="@id/caption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18dp"
+        android:textSize="20dp"
         android:padding="10dp"
-        android:background="#3018738F"
-        android:text="TextView"/>
+        android:backgroundTint="#7EC17503"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:background="@drawable/search_search_bar"/>
+
 </RelativeLayout>
