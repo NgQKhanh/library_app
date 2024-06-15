@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BookSeatActivity">
+
+    <!--- Toolbar -->
+    <include
+        layout="@layout/tool_bar"
+        android:id="@+id/toolbar" />
+
+    <RelativeLayout
+        android:id="@+id/map"
+        android:layout_below="@id/toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="3000dp"
+            android:layout_height="5000dp"
+            android:scaleX="1.1"
+            android:scaleY="1.1"
+            android:background="@drawable/map"/>
+
+        <include
+            android:id="@+id/table_set_1"
+            layout="@layout/component_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-10dp"
+            android:layout_marginTop="50dp"/>
+        <include
+            android:id="@+id/table_set_2"
+            layout="@layout/component_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="50dp"
+            android:onClick="chairPress"/>
+        <include
+            android:id="@+id/table_set_3"
+            layout="@layout/component_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-10dp"
+            android:layout_marginTop="300dp"/>
+        <include
+            android:id="@+id/table_set_4"
+            layout="@layout/component_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="300dp"
+            android:onClick="chairPress"/>
+    </RelativeLayout>
+    <!-- Footer -->
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/cmt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Còn trống: "
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_marginLeft="10dp"/>
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@color/colorGreen"
+            android:layout_toEndOf="@id/cmt1"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/cmt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đang chọn: "
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_marginLeft="135dp"/>
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="#FFFF5722"
+            android:layout_toEndOf="@id/cmt2"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/cmt3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đã đặt: "
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_marginLeft="270dp"/>
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="#FF3E3E3E"
+            android:layout_toEndOf="@id/cmt3"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+</RelativeLayout>

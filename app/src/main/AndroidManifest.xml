@@ -16,13 +16,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".BookSeatActivity"
+            android:exported="false" />
+        <activity
             android:name=".BookCopyActivity"
-            android:exported="false" />
-        <activity
-            android:name=".model.BookCopyInfo"
-            android:exported="false" />
-        <activity
-            android:name=".BookCopyInfo"
             android:exported="false" />
         <activity
             android:name=".ReservationsActivity"

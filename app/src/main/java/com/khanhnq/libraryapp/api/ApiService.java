@@ -21,7 +21,7 @@ public interface ApiService {
             .setDateFormat("yyyy-MM-dd HH:mm:ss")
             .create();
     ApiService apiservice = new Retrofit.Builder()
-            .baseUrl("http://192.168.1.13:3000/app/")
+            .baseUrl("http://192.168.0.112:3000/app/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(ApiService.class);
