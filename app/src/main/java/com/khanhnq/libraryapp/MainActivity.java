@@ -6,14 +6,17 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Debug;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.khanhnq.libraryapp.model.Common;
+
 public class MainActivity extends AppCompatActivity {
 
-    TextView userName, borrowedBookList;
+    TextView userName;
     CardView btnLogout, btnMyAccount, btnSearch, btnRRoom, btnRes, btnBBook;
 
     @Override
@@ -30,12 +33,9 @@ public class MainActivity extends AppCompatActivity {
         btnRRoom = findViewById(R.id.btnReadingRoom);
         btnRes = findViewById(R.id.btnReservation);
 
-        //Lấy dữ liệu từ Intent
-        String UID = getIntent().getBundleExtra("user").getString("userID");
-        String username = getIntent().getBundleExtra("user").getString("username");
-        Bundle user = new Bundle();
-        user.putString("userID",UID);
-        user.putString("username",username);
+        // Lấy dữ liệu
+        Common user = (Common) getApplication();
+        String username = user.getUsername();
 
 //        // Lưu thông tin đăng nhập
 //        SharedPreferences sharedPreferences = getSharedPreferences(UID, MODE_PRIVATE);
@@ -48,9 +48,7 @@ public class MainActivity extends AppCompatActivity {
         btnMyAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(MainActivity.this, MyAccountActivity.class);
-                Intent intent = new Intent(MainActivity.this, BookSeatActivity.class);
-                intent.putExtra("user",user);
+                Intent intent = new Intent(MainActivity.this, MyAccountActivity.class);
                 startActivity(intent);
             }
         });
@@ -68,10 +66,7 @@ public class MainActivity extends AppCompatActivity {
         btnBBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Tạo Intent và đóng gói dữ liệu
                 Intent intent = new Intent(MainActivity.this, BorBookActivity.class);
-                intent.putExtra("user",user);
-                //Chuyển trang
                 startActivity(intent);
             }
         });
@@ -90,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ReservationsActivity.class);
-                intent.putExtra("user",user);
                 startActivity(intent);
             }
         });
@@ -99,6 +93,9 @@ public class MainActivity extends AppCompatActivity {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                user.setUsername("");
+                user.setUserID("");
+                user.setLogin(false);
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();

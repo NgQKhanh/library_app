@@ -13,6 +13,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.khanhnq.libraryapp.api.ApiService;
+import com.khanhnq.libraryapp.model.Common;
 import com.khanhnq.libraryapp.model.getInfoPost;
 import com.khanhnq.libraryapp.model.infoResponse;
 
@@ -39,13 +40,12 @@ public class BorBookActivity extends AppCompatActivity {
         title = findViewById(R.id.toolbarTitle);
         title.setText("Mượn sách");
 
-        //Lấy dữ liệu từ Intent
-        Intent loginInfo = getIntent();
-        Bundle user = loginInfo.getBundleExtra("user");
-        String UID = user.getString("userID");
+        // Lấy dữ liệu
+        Common user = (Common) getApplication();
+        String userID = user.getUserID();
 
         //lấy dữ liệu sách đang mượn
-        getBorrowedBookInfo(UID);
+        getBorrowedBookInfo(userID);
 
         // nút back
         btnBack.setOnClickListener(new View.OnClickListener() {

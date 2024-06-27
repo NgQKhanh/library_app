@@ -21,7 +21,7 @@ public interface ApiService {
             .setDateFormat("yyyy-MM-dd HH:mm:ss")
             .create();
     ApiService apiservice = new Retrofit.Builder()
-            .baseUrl("http://192.168.0.112:3000/app/")
+            .baseUrl("http://192.168.79.109:3000/app/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(ApiService.class);
@@ -48,6 +48,12 @@ public interface ApiService {
     Call<infoResponse.searchCopyList> searchBookCopy(
             @Query("type") String type,
             @Query("id") String id
+    );
+    @GET("getBookingSeat")
+    Call<infoResponse.bookingSeat> getBookingSeat(
+            @Query("date") String date,
+            @Query("shift") String id,
+            @Query("room") String room
     );
 }
 

@@ -108,6 +108,13 @@ public class infoResponse {
             public String getLocation() { return location; }
         }
     }
+
+    // Tìm kiếm bản copy
+    public class bookingSeat{
+        private List<Integer> seats;
+        public List<Integer> getList() {return seats;}
+
+    }
 }
 
 

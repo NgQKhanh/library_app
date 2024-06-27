@@ -44,4 +44,12 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="confirm_booking_seat">Xác nhận đặt chỗ</string>
+    <string name="available">Còn trống:</string>
+    <string name="log_in">Đăng nhập</string>
+    <string name="username">Tên đăng nhập</string>
+    <string name="home_screen">Trang chủ</string>
+    <string name="account">Tài khoản</string>
+    <string name="confirm">Xác nhận</string>
+    <string name="select_seat">Chọn chỗ ngồi</string>
 </resources>

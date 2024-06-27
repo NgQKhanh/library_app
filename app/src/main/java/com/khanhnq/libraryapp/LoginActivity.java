@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.khanhnq.libraryapp.api.ApiService;
 import com.khanhnq.libraryapp.model.loginResponse;
 import com.khanhnq.libraryapp.model.loginPost;
+import com.khanhnq.libraryapp.model.Common;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,24 +55,24 @@ public class LoginActivity extends AppCompatActivity {
         username = "k";
         password = "1";
         loginPost postData = new loginPost(username, password);
-
+        Log.d("Debug booking seat", "NHAY VAO DAY 0: ");
         // Gửi yêu cầu đăng nhập sử dụng Retrofit và ApiService
         ApiService.apiservice.loginAuth(postData).enqueue(new Callback<loginResponse>() {
             @Override
             public void onResponse(Call<loginResponse> call, Response<loginResponse> response) {
+                Log.d("Debug booking seat", "NHAY VAO DAY 1");
                 loginResponse result = response.body();
                 if((result != null)&&(result.isStatus())){
-                    // Đăng nhập thành công
 
-                    // Tạo Intent và đóng gói dữ liệu
-                    Intent loginInfo = new Intent(LoginActivity.this, MainActivity.class);
-                    Bundle user = new Bundle();
-                    user.putString("userID",result.getUserID());
-                    user.putString("username",result.getUsername());
-                    loginInfo.putExtra("user",user);
+                    // Đăng nhập thành công, lấy dữ liệu
+                    Common user = (Common) getApplication();
+                    user.setUserID(result.getUserID());
+                    user.setUsername(result.getUsername());
+                    user.setLogin(true);
 
-                    // Chuyển hướng activity
-                    startActivities(new Intent[]{loginInfo});
+                    // CHuyển hướng sang trang chủ
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
                     finish();
                 }
                 else{

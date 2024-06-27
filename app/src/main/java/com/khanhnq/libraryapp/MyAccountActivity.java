@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.khanhnq.libraryapp.R;
+import com.khanhnq.libraryapp.model.Common;
 
 public class MyAccountActivity extends AppCompatActivity {
     ImageView btnBack;
@@ -31,8 +32,10 @@ public class MyAccountActivity extends AppCompatActivity {
         number = findViewById(R.id.number);
         email = findViewById(R.id.email);
 
-        //Lấy dữ liệu từ Intent
-        String username = getIntent().getBundleExtra("user").getString("username");
+        // Lấy dữ liệu
+        Common user = (Common) getApplication();
+        String userID = user.getUserID();
+        String username = user.getUsername();
 
         // Hiển thị thông tin
         title.setText("Tài khoản");

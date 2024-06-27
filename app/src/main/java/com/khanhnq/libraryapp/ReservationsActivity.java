@@ -1,6 +1,7 @@
 package com.khanhnq.libraryapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -15,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -22,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.khanhnq.libraryapp.api.ApiService;
+import com.khanhnq.libraryapp.model.Common;
 import com.khanhnq.libraryapp.model.getInfoPost;
 import com.khanhnq.libraryapp.model.infoResponse;
 
@@ -41,36 +44,41 @@ import com.khanhnq.libraryapp.component.Category;
 
 public class ReservationsActivity extends AppCompatActivity {
     ImageView btnBack;
-    TextView title, showDate;
+    TextView title, showDate, btnPickSeat;
     Spinner showShift;
-    Button btnConfirm, btnDel;
-    String[] shift = {"Kíp sáng", "Kíp chiều"};
+    Button btnDel;
     Integer selectedShift;
     CategoryAdapter categoryAdapter;
     private Date selectedDate;
     AlertDialog.Builder builder;
+    LinearLayout userInfo, userInfoDetail, rsrvnForm, rsrvnFormDetail,info, infoDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservations);
 
-        //Lấy dữ liệu từ Intent
-        Intent loginInfo = getIntent();
-        Bundle user = loginInfo.getBundleExtra("user");
-        String UID = user.getString("userID");
+        // Lấy dữ liệu
+        Common user = (Common) getApplication();
+        String userID = user.getUserID();
 
         // Ánh xạ id
         btnBack = findViewById(R.id.back_icon);
         showDate = findViewById(R.id.showPickedDate);
         showShift = findViewById(R.id.showPickedShift);
-        btnConfirm = findViewById(R.id.btnRsvnConfirm);
         btnDel = findViewById(R.id.btnRsvnDel);
         title = findViewById(R.id.toolbarTitle);
+        btnPickSeat = findViewById(R.id.pickSeat);
+        userInfo = findViewById(R.id.userInfo);
+        userInfoDetail = findViewById(R.id.userInfoDetail);
+        rsrvnForm = findViewById(R.id.rsrvnForm);
+        rsrvnFormDetail = findViewById(R.id.rsrvnFormDetail);
+        info = findViewById(R.id.info);
+        infoDetail = findViewById(R.id.infoDetail);
         title.setText("Đặt chỗ");
 
         // Hiển thị thông tin đặt chỗ phòng đọc
-        getReservationInfo(UID);
+        getReservationInfo(userID);
 
         // Bấm chọn ngày
         showDate.setOnClickListener(new View.OnClickListener() {
@@ -93,16 +101,55 @@ public class ReservationsActivity extends AppCompatActivity {
             }
         });
 
-        // Xác nhận đăng ký
-        btnConfirm.setOnClickListener(new View.OnClickListener() {
+        // Bấm chọn chỗ ngồi
+        btnPickSeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(getSelectedDate() == null) {
+                if(selectedDate == null || selectedShift == null) {
                     Toast.makeText(ReservationsActivity.this, "Chưa chọn ngày đăng ký", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Date selectedDate = getSelectedDate();
-                    confirmRsvn(UID, selectedDate, selectedShift);
+                    Intent intent = new Intent(ReservationsActivity.this, BookSeatActivity.class);
+                    intent.putExtra("date",  selectedDate.toString());
+                    intent.putExtra("shift", selectedShift.toString());
+                    startActivity(intent);
+                }
+            }
+        });
+
+        // Ẩn hiện menu
+        userInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(userInfoDetail.getVisibility() == View.VISIBLE) {
+                    userInfoDetail.setVisibility(View.GONE);
+                }
+                else {
+                    userInfoDetail.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        rsrvnForm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(rsrvnFormDetail.getVisibility() == View.VISIBLE) {
+                    rsrvnFormDetail.setVisibility(View.GONE);
+                }
+                else {
+                    rsrvnFormDetail.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(infoDetail.getVisibility() == View.VISIBLE) {
+                    infoDetail.setVisibility(View.GONE);
+                }
+                else {
+                    infoDetail.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -118,7 +165,7 @@ public class ReservationsActivity extends AppCompatActivity {
                         .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                delRsvn(UID);
+                                delRsvn(userID);
                                 }
                         })
                         .setNegativeButton("Không", new DialogInterface.OnClickListener() {
@@ -177,6 +224,7 @@ public class ReservationsActivity extends AppCompatActivity {
             }
         });
     }
+
     // Tạo bảng chọn ngày
     private void pickDate() {
         showDate = findViewById(R.id.showPickedDate);
@@ -195,10 +243,6 @@ public class ReservationsActivity extends AppCompatActivity {
             }
         },year, month, day);
         datePickerDialog.show();
-    }
-    // Phương thức để trả về ngày được chọn
-    private Date getSelectedDate() {
-        return selectedDate;
     }
 
     // Hàm chèn hàng vào bảng thông tin đăt chỗ
@@ -303,6 +347,7 @@ public class ReservationsActivity extends AppCompatActivity {
             return null;
         }
     }
+
     // Category
     private List<Category> getListCategory(){
         List<Category> list = new ArrayList<>();
