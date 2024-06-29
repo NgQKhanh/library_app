@@ -18,7 +18,7 @@ import com.khanhnq.libraryapp.component.CategoryAdapter;
 import com.khanhnq.libraryapp.component.Category;
 import com.khanhnq.libraryapp.component.BookTitleList;
 import com.khanhnq.libraryapp.component.BookListAdapter;
-import com.khanhnq.libraryapp.databinding.ActivityMainBinding;
+//import com.khanhnq.libraryapp.databinding.ActivityMainBinding;
 import com.khanhnq.libraryapp.model.infoResponse;
 import com.khanhnq.libraryapp.api.ApiService;
 
@@ -39,7 +39,7 @@ public class SearchActivity extends AppCompatActivity {
     String[] searchField = {"bookName","author","category","publisher"};
     SearchView searchView;
     BookListAdapter bookListAdapter;
-    ActivityMainBinding binding;
+    //ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +67,7 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         // Bấm chọn search field
-        categoryAdapter = new CategoryAdapter(this, R.layout.search_field, R.layout.category_shift, getListCategory());
+        categoryAdapter = new CategoryAdapter(this, R.layout.search_field, R.layout.category_item, getListCategory());
         showField.setAdapter(categoryAdapter);
         showField.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -101,10 +101,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onResponse(Call<infoResponse.searchTitleList> call, Response<infoResponse.searchTitleList> response) {
                 if (response.isSuccessful()) {
                     infoResponse.searchTitleList list = response.body();
-                    if (list == null) {
-                        Toast.makeText(SearchActivity.this, "Không tìm thấy dữ liệu!", Toast.LENGTH_SHORT).show();
-                    }
-                    else if (list.getList().isEmpty()) {
+                    if (list == null || list.getList().isEmpty()) {
                         Toast.makeText(SearchActivity.this, "Không tìm thấy dữ liệu!", Toast.LENGTH_SHORT).show();
                     }
                     else {

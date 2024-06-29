@@ -32,7 +32,7 @@
                 android:text="@string/confirm_booking_seat"
                 android:gravity="center"
                 android:layout_marginTop="20dp"
-                android:textSize="25sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="@color/sysDarkBlue"/>
 
@@ -42,7 +42,7 @@
                 android:text="Tài khoản: "
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/sysDarkBlue"/>
 
@@ -53,7 +53,7 @@
                 android:text="Nguyễn Quốc Khánh"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="0dp"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textColor="@color/sysDarkBlue"/>
             <View
                 android:layout_width="match_parent"
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:text="Đặt chỗ: "
                 android:layout_marginStart="20dp"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/sysDarkBlue"/>
             <TextView
@@ -75,7 +75,7 @@
                 android:text="Bàn: 1 Ghế: 1 Phòng: 201"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="0dp"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textColor="@color/sysDarkBlue"/>
             <View
                 android:layout_width="match_parent"
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:text="Thời gian: "
                 android:layout_marginStart="20dp"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/sysDarkBlue"/>
             <TextView
@@ -98,7 +98,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginBottom="20dp"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textColor="@color/sysDarkBlue"/>
 
             <Button
@@ -112,8 +112,6 @@
                 android:layout_margin="20dp"/>
             />
         </LinearLayout>
-
-
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

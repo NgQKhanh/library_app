@@ -44,7 +44,7 @@
 
                         <!-- Table Heading -->
                         <TableRow
-                            android:background="@color/colorGreen"
+                            android:background="@color/sysGreen"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <TextView

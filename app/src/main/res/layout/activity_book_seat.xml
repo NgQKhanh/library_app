@@ -106,7 +106,7 @@
             <ImageView
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:background="@color/colorGreen"
+                android:background="@color/sysGreen"
                 android:layout_toEndOf="@id/cmt1"
                 android:layout_centerVertical="true"/>
 

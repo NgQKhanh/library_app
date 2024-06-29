@@ -37,7 +37,7 @@
                 android:id="@+id/tv_selected"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:padding="10dp"
                 android:backgroundTint="#7EC17503"
                 android:textAlignment="center"
@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@android:color/transparent"
-                android:textSize="18dp"/>
+                android:textSize="18sp"/>
         </RelativeLayout>
     </RelativeLayout>
 

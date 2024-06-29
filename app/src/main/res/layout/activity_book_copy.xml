@@ -20,7 +20,7 @@
         android:layout_marginTop="14dp"
         android:text="Tam Quốc Diễn Nghĩa toàn tập cực kỳ ghê gớm hahaha"
         android:textSize="20sp"
-        android:textColor= "#8692f7"
+        android:textColor= "@color/purple_700"
         android:textStyle="bold"
         android:layout_gravity="center"
         android:gravity="center"/>
@@ -98,7 +98,7 @@
         <!-- Table Heading -->
         <TableRow
             android:id="@+id/tableId"
-            android:background="@color/colorGreen"
+            android:background="@color/sysGreen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView

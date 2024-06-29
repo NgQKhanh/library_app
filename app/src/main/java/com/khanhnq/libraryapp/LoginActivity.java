@@ -55,12 +55,10 @@ public class LoginActivity extends AppCompatActivity {
         username = "k";
         password = "1";
         loginPost postData = new loginPost(username, password);
-        Log.d("Debug booking seat", "NHAY VAO DAY 0: ");
         // Gửi yêu cầu đăng nhập sử dụng Retrofit và ApiService
         ApiService.apiservice.loginAuth(postData).enqueue(new Callback<loginResponse>() {
             @Override
             public void onResponse(Call<loginResponse> call, Response<loginResponse> response) {
-                Log.d("Debug booking seat", "NHAY VAO DAY 1");
                 loginResponse result = response.body();
                 if((result != null)&&(result.isStatus())){
 

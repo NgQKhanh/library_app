@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "856156739359",
+    "project_id": "library-notification-e422f",
+    "storage_bucket": "library-notification-e422f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856156739359:android:bd6603ceaa23747828022a",
+        "android_client_info": {
+          "package_name": "com.khanhnq.libraryapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtcGaHUsxZtZ4MY3UHAkfET6beGPJ5pYI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

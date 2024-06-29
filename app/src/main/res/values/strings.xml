@@ -44,12 +44,26 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
-    <string name="confirm_booking_seat">Xác nhận đặt chỗ</string>
-    <string name="available">Còn trống:</string>
-    <string name="log_in">Đăng nhập</string>
+    <!-- System text -->
+    <string name="login">Đăng nhập</string>
     <string name="username">Tên đăng nhập</string>
-    <string name="home_screen">Trang chủ</string>
+    <string name="home">Trang chủ</string>
     <string name="account">Tài khoản</string>
+    <string name="reservation">Đặt chỗ</string>
+    <string name="announce">Thông báo</string>
+
+    <!-- Command text-->
     <string name="confirm">Xác nhận</string>
+    <string name="confirm_booking_seat">Xác nhận đặt chỗ</string>
     <string name="select_seat">Chọn chỗ ngồi</string>
+
+    <!-- Notification text -->
+    <string name="data_not_found">Không tìm thấy dữ liệu!</string>
+    <string name="available">Còn trống:</string>
+    <string name="error_occurred">Đã có lỗi xảy ra!</string>
+
+    <!-- Info text-->
+    <string name="selected_date_and_shift">Ngày: %1$s Kíp: %2$d</string>
+    <string name="selected_seat_and_room">Ghế: %1$d Bàn: %2$d Phòng: %3$d</string>
+    <string name="selected_chair_and_table">Đã chọn: Bàn %1$d Ghế %2$d</string>
 </resources>

@@ -17,7 +17,6 @@
         <androidx.cardview.widget.CardView
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_below="@id/toolbar"
             app:cardElevation="10dp"
             android:layout_margin="15dp"
             app:cardCornerRadius="15dp">
@@ -33,7 +32,7 @@
                     android:text="Thông tin đăng ký phòng đọc"
                     android:textStyle="bold"
                     android:layout_gravity="center_horizontal"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:layout_margin="20dp"/>
                 <LinearLayout
                     android:id="@+id/infoDetail"
@@ -45,7 +44,6 @@
                         android:id="@+id/reservationTable"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/text1"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:layout_marginBottom="20dp"
@@ -53,7 +51,7 @@
 
                         <!-- Table Heading -->
                         <TableRow
-                            android:background="@color/colorGreen"
+                            android:background="@color/sysGreen"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <TextView
@@ -105,7 +103,7 @@
                     android:text="Thông tin của tôi"
                     android:textStyle="bold"
                     android:layout_gravity="center_horizontal"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:layout_margin="20dp"/>
                 <LinearLayout
                     android:id="@+id/userInfoDetail"
@@ -117,22 +115,10 @@
                         android:id="@+id/showUserInfo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/reservationTable"
                         android:text="Bạn chưa đặt chỗ phòng đọc."
-                        android:textSize="18dp"
+                        android:textSize="18sp"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginBottom="20dp"/>
-                    <!-- Hủy đặt chỗ -->
-                    <Button
-                        android:id="@+id/btnRsvnDel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:layout_below="@id/showUserInfo"
-                        android:layout_gravity="center_horizontal"
-                        android:text="Hủy đăng ký"
-                        android:onClick="showDatePickerDialog"
-                        android:visibility="visible"/>
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -156,21 +142,20 @@
                     android:text="Đăng ký"
                     android:textStyle="bold"
                     android:layout_gravity="center_horizontal"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:layout_margin="20dp"/>
                 <LinearLayout
                 android:id="@+id/rsrvnFormDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="visible">
                 <!-- Chọn ngày -->
                 <LinearLayout
                     android:id="@+id/pick1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:layout_below="@id/text3"
                     android:orientation="horizontal">
                     <TextView
                         android:id="@+id/showPickedDate"
@@ -180,7 +165,7 @@
                         android:layout_gravity="center"
                         android:background="#3018738F"
                         android:hint="Ngày đăng ký"
-                        android:textSize="18dp"
+                        android:textSize="16sp"
                         android:padding="10dp"
                         android:layout_marginRight="20dp"
                         android:layout_marginLeft="20dp"
@@ -188,11 +173,9 @@
                 </LinearLayout>
                 <!-- Chọn kíp -->
                 <LinearLayout
-                    android:id="@+id/pick2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:layout_below="@id/pick1"
                     android:orientation="horizontal">
 
                     <Spinner
@@ -201,7 +184,24 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@android:color/transparent"
-                        android:textSize="18dp"
+                        android:textSize="18sp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp" />
+                </LinearLayout>
+                <!-- Chọn phòng -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/showPickedRoom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:textSize="18sp"
                         android:layout_marginRight="20dp"
                         android:layout_marginLeft="20dp" />
                 </LinearLayout>
@@ -210,7 +210,7 @@
                     android:id="@+id/pickSeat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18dp"
+                    android:textSize="16sp"
                     android:padding="10dp"
                     android:background="#3018738F"
                     android:drawableRight="@drawable/rsvn_icon_chair"

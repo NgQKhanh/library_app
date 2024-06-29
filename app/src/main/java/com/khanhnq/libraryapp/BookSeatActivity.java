@@ -36,7 +36,7 @@ public class BookSeatActivity extends AppCompatActivity {
     RelativeLayout map, result;
     private float dX, dY;
     private int lastAction;
-    int userSelectedSeat;
+    int selectedChair = 0, selectedTable = 0;
     List<Integer> naSeats = new ArrayList<>();
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -50,18 +50,16 @@ public class BookSeatActivity extends AppCompatActivity {
         map = findViewById(R.id.map);
         result = findViewById(R.id.showSelectedSeat);
         selectedSeatText = findViewById(R.id.selectedSeatText);
-        btnConfirm = findViewById(R.id.btnConfirm);
+        btnConfirm = findViewById(R.id.btnConfirmSeat);
         title.setText(R.string.select_seat);
 
         // Lấy dữ liệu
         Common user = (Common) getApplication();
-        String userID = user.getUserID();
         //Lấy dữ liệu từ Intent
         Intent intent = getIntent();
-        String date = intent.getStringExtra("date");
-        String shift = intent.getStringExtra("shift");
-
-        Log.d("Debug booking seat", "Data: " + userID + date + shift);
+        String selectedDate = intent.getStringExtra("date");
+        int selectedShift = intent.getIntExtra("shift",0);
+        int selectedRoom = intent.getIntExtra("room",0);
 
         setupTableSet(R.id.table_set_1);
         setupTableSet(R.id.table_set_2);
@@ -103,7 +101,7 @@ public class BookSeatActivity extends AppCompatActivity {
             return true;
         });
 
-        searchBook ( "2024-06-23", shift, "1");
+        getBookingInfo ( selectedDate, selectedShift, selectedRoom);
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,9 +111,11 @@ public class BookSeatActivity extends AppCompatActivity {
                 }
                 else {
                     Intent intent = new Intent(BookSeatActivity.this, ConfirmBookingSeatActivity.class);
-                    intent.putExtra("date",  date);
-                    intent.putExtra("shift", shift);
-                    intent.putExtra("seat",  userSelectedSeat);
+                    intent.putExtra("date",  selectedDate);
+                    intent.putExtra("shift", selectedShift);
+                    intent.putExtra("chair", selectedChair);
+                    intent.putExtra("table", selectedTable);
+                    intent.putExtra("room", selectedRoom);
                     startActivity(intent);
                 }
             }
@@ -142,7 +142,6 @@ public class BookSeatActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             selectSeat(chair,tableSetId);
-                            Log.d("Debug select seat","DA CHON: " + userSelectedSeat);
                         }
                     });
                 }
@@ -201,30 +200,27 @@ public class BookSeatActivity extends AppCompatActivity {
             if (selectedSeat != null) {
                 selectedSeat.setColorFilter(Color.parseColor("#03C60B")); // bỏ chọn chỗ đã chọn trước đó
             }
-            int table = 0, chair = 0;
             String tableSetName = getResources().getResourceEntryName(tableSetId);
             String chairName = getResources().getResourceEntryName(seat.getId());
             for(int i=1; i<= 4; i++){
                 if(Objects.equals(tableSetName, "table_set_" + i)) {
-                    userSelectedSeat = i*100;
-                    table = i;
+                    selectedTable = i;
                 }
             }
             for(int i=1; i<= 10; i++){
                 if(Objects.equals(chairName, "chair" + i)) {
-                    userSelectedSeat += i;
-                    chair = i;
+                    selectedChair = i;
                 }
             }
             result.setVisibility(View.VISIBLE);
-            selectedSeatText.setText("Đã chọn: bàn " + table + " ghế "+ chair);
+            selectedSeatText.setText(getString(R.string.selected_chair_and_table, selectedChair, selectedTable));
             selectedSeat = seat;
             seat.setColorFilter(Color.parseColor("#FFFF5722"));
         }
     }
 
-    //Lấy thông tin chỗ ngồi đã đặt
-    public void searchBook (String date, String shift, String room)
+    //Lấy thông tin chỗ ngồi của phòng
+    public void getBookingInfo (String date, int shift, int room)
     {
         ApiService.apiservice.getBookingSeat(date, shift, room).enqueue(new Callback<infoResponse.bookingSeat>() {
             @Override
@@ -232,15 +228,12 @@ public class BookSeatActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     infoResponse.bookingSeat list = response.body();
                     if (list == null) {
-                        Toast.makeText(BookSeatActivity.this, "Không tìm thấy dữ liệu!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BookSeatActivity.this, R.string.data_not_found, Toast.LENGTH_SHORT).show();
                     } else {
-                           naSeats = list.getList();
-//                            for (Integer seat : naSeats) {
-//                                Log.d("DEBUGGGGGG", "Test: " );
-//                            }
-                        };
-                    }
+                        naSeats = list.getList();
+                    };
                 }
+            }
             @Override
             public void onFailure(Call<infoResponse.bookingSeat> call, Throwable t) {
 

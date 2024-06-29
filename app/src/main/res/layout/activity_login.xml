@@ -11,7 +11,7 @@
         android:id="@+id/signin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/log_in"
+        android:text="@string/login"
         android:textColor="@color/white"
         android:textSize="32sp"
         android:textStyle="bold"

@@ -9,12 +9,16 @@ public class getInfoPost {
     }
     public static class reservationPost{
         private String userID;
-        private Date date;
-        private Integer shift;
-        public reservationPost(String userID, Date date, Integer shift) {
+        private String date;
+        private int shift;
+        private int seat;
+        private int room;
+        public reservationPost(String userID, String date, int shift, int seat, int room) {
             this.userID = userID;
             this.date = date;
             this.shift = shift;
+            this.seat = seat;
+            this.room = room;
         }
     }
 }

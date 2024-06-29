@@ -45,12 +45,12 @@ import com.khanhnq.libraryapp.component.Category;
 public class ReservationsActivity extends AppCompatActivity {
     ImageView btnBack;
     TextView title, showDate, btnPickSeat;
-    Spinner showShift;
+    Spinner showShift, showRoom;
     Button btnDel;
-    Integer selectedShift;
-    CategoryAdapter categoryAdapter;
-    private Date selectedDate;
-    AlertDialog.Builder builder;
+    int selectedShift = 1, selectedRoom = 1;
+    CategoryAdapter shiftAdapter,roomAdapter;
+    private Date selectDate;
+    String selectedDate;
     LinearLayout userInfo, userInfoDetail, rsrvnForm, rsrvnFormDetail,info, infoDetail;
 
     @Override
@@ -66,7 +66,7 @@ public class ReservationsActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.back_icon);
         showDate = findViewById(R.id.showPickedDate);
         showShift = findViewById(R.id.showPickedShift);
-        btnDel = findViewById(R.id.btnRsvnDel);
+        showRoom = findViewById(R.id.showPickedRoom);
         title = findViewById(R.id.toolbarTitle);
         btnPickSeat = findViewById(R.id.pickSeat);
         userInfo = findViewById(R.id.userInfo);
@@ -75,7 +75,7 @@ public class ReservationsActivity extends AppCompatActivity {
         rsrvnFormDetail = findViewById(R.id.rsrvnFormDetail);
         info = findViewById(R.id.info);
         infoDetail = findViewById(R.id.infoDetail);
-        title.setText("Đặt chỗ");
+        title.setText(R.string.reservation);
 
         // Hiển thị thông tin đặt chỗ phòng đọc
         getReservationInfo(userID);
@@ -89,13 +89,26 @@ public class ReservationsActivity extends AppCompatActivity {
         });
 
         // Bấm chọn kíp
-        categoryAdapter = new CategoryAdapter(this,R.layout.select_shift,R.layout.category_shift,getListCategory());
-        showShift.setAdapter(categoryAdapter);
+        shiftAdapter = new CategoryAdapter(this,R.layout.select_shift,R.layout.category_item,getCategoryShift());
+        showShift.setAdapter(shiftAdapter);
         showShift.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
-                selectedShift = i+1;
+                    selectedShift = i+1;
                 }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        // Bấm chọn phòng
+        roomAdapter = new CategoryAdapter(this,R.layout.select_shift,R.layout.category_item,getCategoryRoom());
+        showRoom.setAdapter(roomAdapter);
+        showRoom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
+                selectedRoom = i+1;
+            }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -105,13 +118,14 @@ public class ReservationsActivity extends AppCompatActivity {
         btnPickSeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(selectedDate == null || selectedShift == null) {
+                if(selectDate == null ) {
                     Toast.makeText(ReservationsActivity.this, "Chưa chọn ngày đăng ký", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Intent intent = new Intent(ReservationsActivity.this, BookSeatActivity.class);
-                    intent.putExtra("date",  selectedDate.toString());
-                    intent.putExtra("shift", selectedShift.toString());
+                    intent.putExtra("date",  selectedDate);
+                    intent.putExtra("shift", selectedShift);
+                    intent.putExtra("room", selectedRoom);
                     startActivity(intent);
                 }
             }
@@ -154,30 +168,6 @@ public class ReservationsActivity extends AppCompatActivity {
             }
         });
 
-        //Hủy đăng ký
-        builder = new AlertDialog.Builder(this);
-        btnDel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                builder.setTitle("Thông báo")
-                        .setMessage("Bạn có muốn hủy đăng ký không?")
-                        .setCancelable(true)
-                        .setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                delRsvn(userID);
-                                }
-                        })
-                        .setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        })
-                        .show();
-            }
-        });
-
         // Nút back
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,16 +197,16 @@ public class ReservationsActivity extends AppCompatActivity {
                     addRsvnRoomInfo(formatDate(date), shift1, shift2);
                 }
                 // Thông tin đăng ký của người dùng
-                List<infoResponse.RsvnInfo.userReservation.Reservation> userList = data.getUserReservation().getRsvn();
-                String text = "Bạn chưa đăng ký phòng đọc.";
-                if(userList.size() > 0){
-                    text = "Ngày đăng ký: ";
-                    for (int i = 0; i < userList.size(); i++) {
-                        text = text + "\n" + formatDate(userList.get(i).getDate()) + ", kíp: " + userList.get(i).getShift();
-                    }
-                    TextView showUserRsvn = findViewById(R.id.showUserInfo);
-                    showUserRsvn.setText(text);
-                }
+//                List<infoResponse.RsvnInfo.userReservation.Reservation> userList = data.getUserReservation().getRsvn();
+//                String text = "Bạn chưa đăng ký phòng đọc.";
+//                if(userList.size() > 0){
+//                    text = "Ngày đăng ký: ";
+//                    for (int i = 0; i < userList.size(); i++) {
+//                        text = text + "\n" + formatDate(userList.get(i).getDate()) + ", kíp: " + userList.get(i).getShift();
+//                    }
+//                    TextView showUserRsvn = findViewById(R.id.showUserInfo);
+//                    showUserRsvn.setText(text);
+//                }
             }
             @Override
             public void onFailure(Call<infoResponse.RsvnInfo> call, Throwable t) {
@@ -237,9 +227,10 @@ public class ReservationsActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int y, int m, int d) {
                  c.set(y,m,d);
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 showDate.setText(simpleDateFormat.format(c.getTime()));
-                selectedDate = c.getTime();
+                selectDate = c.getTime();
+                selectedDate = simpleDateFormat.format(c.getTime());
             }
         },year, month, day);
         datePickerDialog.show();
@@ -283,58 +274,6 @@ public class ReservationsActivity extends AppCompatActivity {
         tableLayout.addView(newRow);
     }
 
-    //Xác nhận đặt chỗ
-    private void confirmRsvn (String userID, Date date, Integer shift){
-        getInfoPost.reservationPost post = new getInfoPost.reservationPost(userID, date, shift);
-        ApiService.apiservice.confirmRsvn(post).enqueue(new Callback<infoResponse.confirmRsvn>() {
-            @Override
-            public void onResponse(Call<infoResponse.confirmRsvn> call, Response<infoResponse.confirmRsvn> response) {
-                if ("ok".equals(response.body().getStatus().toString())) {
-                    Toast.makeText(ReservationsActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
-                    TableLayout tableLayout = findViewById(R.id.reservationTable);
-                    tableLayout.removeAllViews();
-                    getReservationInfo(userID);
-                }
-                else if("exceeded".equals(response.body().getStatus().toString())) {
-                    Toast.makeText(ReservationsActivity.this, "Vượt quá số lượng đăng ký", Toast.LENGTH_SHORT).show();
-                }
-                else if("unavailable".equals(response.body().getStatus().toString())) {
-                    Toast.makeText(ReservationsActivity.this, "Chưa mở đăng ký", Toast.LENGTH_SHORT).show();
-                }
-                else if("error".equals(response.body().getStatus().toString())) {
-                    Toast.makeText(ReservationsActivity.this, "Có lỗi xảy ra", Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<infoResponse.confirmRsvn> call, Throwable t) {
-            }
-        });
-    }
-
-    // Hàm HỦY đăng ký
-    private void delRsvn (String userID){
-        getInfoPost postData = new getInfoPost(userID);
-        ApiService.apiservice.delRsvn(postData).enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                int statusCode = response.code();
-                Log.d("debug", String.valueOf(statusCode));
-                if (response.isSuccessful()) {
-//                    TableLayout tableLayout = findViewById(R.id.reservationTable);
-//                    tableLayout.removeAllViews();
-//                    getReservationInfo(userID);
-                    Toast.makeText(ReservationsActivity.this, "Hủy đăng ký thành công!", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(ReservationsActivity.this, "Đã có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(ReservationsActivity.this, "Đã có lỗi xảy raaaa!", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
     //Hàm format date
     public static String formatDate(String dateString) {
         try {
@@ -349,10 +288,18 @@ public class ReservationsActivity extends AppCompatActivity {
     }
 
     // Category
-    private List<Category> getListCategory(){
+    private List<Category> getCategoryShift(){
         List<Category> list = new ArrayList<>();
         list.add(new Category("Kíp sáng"));
         list.add(new Category("Kíp chiều"));
+        return list;
+    }
+
+    private List<Category> getCategoryRoom(){
+        List<Category> list = new ArrayList<>();
+        list.add(new Category("Phòng 1"));
+        list.add(new Category("Phòng 2"));
+        list.add(new Category("Phòng 3"));
         return list;
     }
 }
