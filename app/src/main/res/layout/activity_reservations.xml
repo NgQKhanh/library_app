@@ -29,10 +29,10 @@
                     android:id="@+id/text1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Thông tin đăng ký phòng đọc"
+                    android:text="Thông tin phòng đọc"
                     android:textStyle="bold"
                     android:layout_gravity="center_horizontal"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:layout_margin="20dp"/>
                 <LinearLayout
                     android:id="@+id/infoDetail"
@@ -40,6 +40,23 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="gone">
+                    <!-- Chọn phòng -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:orientation="horizontal">
+
+                        <Spinner
+                            android:id="@+id/dropListRoomToGetInfo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"
+                            android:textSize="16sp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="20dp" />
+                    </LinearLayout>
                     <TableLayout
                         android:id="@+id/reservationTable"
                         android:layout_width="match_parent"
@@ -103,7 +120,7 @@
                     android:text="Thông tin của tôi"
                     android:textStyle="bold"
                     android:layout_gravity="center_horizontal"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:layout_margin="20dp"/>
                 <LinearLayout
                     android:id="@+id/userInfoDetail"
@@ -116,7 +133,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Bạn chưa đặt chỗ phòng đọc."
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginBottom="20dp"/>
                 </LinearLayout>
@@ -142,14 +159,14 @@
                     android:text="Đăng ký"
                     android:textStyle="bold"
                     android:layout_gravity="center_horizontal"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:layout_margin="20dp"/>
                 <LinearLayout
                 android:id="@+id/rsrvnFormDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                    android:visibility="visible">
+                    android:visibility="gone">
                 <!-- Chọn ngày -->
                 <LinearLayout
                     android:id="@+id/pick1"
@@ -165,7 +182,7 @@
                         android:layout_gravity="center"
                         android:background="#3018738F"
                         android:hint="Ngày đăng ký"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:padding="10dp"
                         android:layout_marginRight="20dp"
                         android:layout_marginLeft="20dp"
@@ -179,12 +196,12 @@
                     android:orientation="horizontal">
 
                     <Spinner
-                        android:id="@+id/showPickedShift"
+                        android:id="@+id/dropListShift"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@android:color/transparent"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:layout_marginRight="20dp"
                         android:layout_marginLeft="20dp" />
                 </LinearLayout>
@@ -196,12 +213,12 @@
                     android:orientation="horizontal">
 
                     <Spinner
-                        android:id="@+id/showPickedRoom"
+                        android:id="@+id/dropListRoomToRsvn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@android:color/transparent"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:layout_marginRight="20dp"
                         android:layout_marginLeft="20dp" />
                 </LinearLayout>
@@ -210,7 +227,7 @@
                     android:id="@+id/pickSeat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:padding="10dp"
                     android:background="#3018738F"
                     android:drawableRight="@drawable/rsvn_icon_chair"

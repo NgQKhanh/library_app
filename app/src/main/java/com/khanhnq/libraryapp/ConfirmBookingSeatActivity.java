@@ -47,7 +47,7 @@ public class ConfirmBookingSeatActivity extends AppCompatActivity {
         seat = findViewById(R.id.seat);
         time = findViewById(R.id.time);
         btnConfirm = findViewById(R.id.btnConfirm);
-        title.setText(R.string.select_seat);
+        title.setText(R.string.confirm_booking_seat);
 
         // Lấy dữ liệu
         Common user = (Common) getApplication();

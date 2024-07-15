@@ -130,4 +130,11 @@
                 android:background="@drawable/table_border"/>
         </TableRow>
     </TableLayout>
+    <Button
+        android:id="@+id/notifyReceive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/notify_when_book_available"
+        android:layout_gravity="center"/>
 </LinearLayout>

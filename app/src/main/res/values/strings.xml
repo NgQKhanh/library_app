@@ -61,9 +61,11 @@
     <string name="data_not_found">Không tìm thấy dữ liệu!</string>
     <string name="available">Còn trống:</string>
     <string name="error_occurred">Đã có lỗi xảy ra!</string>
+    <string name="msg_token_fmt">Your device registration token is %1$s\n</string>
 
     <!-- Info text-->
     <string name="selected_date_and_shift">Ngày: %1$s Kíp: %2$d</string>
     <string name="selected_seat_and_room">Ghế: %1$d Bàn: %2$d Phòng: %3$d</string>
     <string name="selected_chair_and_table">Đã chọn: Bàn %1$d Ghế %2$d</string>
+    <string name="notify_when_book_available">Nhận thông báo khi có sách</string>
 </resources>

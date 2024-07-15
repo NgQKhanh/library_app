@@ -1,12 +1,15 @@
 package com.khanhnq.libraryapp;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -20,6 +23,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.khanhnq.libraryapp.api.ApiService;
+import com.khanhnq.libraryapp.model.Common;
 import com.khanhnq.libraryapp.model.infoResponse;
 
 import java.util.List;
@@ -33,6 +37,8 @@ public class BookCopyActivity extends AppCompatActivity {
     ImageView btnBack;
     TextView title, bookNameId, authorId, categoryId, publisherId, notification;
     TableRow tableId;
+    Button btnNotifyReceive;
+    AlertDialog.Builder builder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,10 +53,14 @@ public class BookCopyActivity extends AppCompatActivity {
         publisherId = findViewById(R.id.publisher);
         tableId = findViewById(R.id.tableId);
         notification = findViewById(R.id.notification);
+        btnNotifyReceive = findViewById(R.id.notifyReceive);
 
         title.setText("Chi tiết");
 
-        //Lấy dữ liệu từ Intent
+        //Lấy dữ liệu
+        Common user = (Common) getApplication();
+        String userID = user.getUserID();
+
         Intent intent = getIntent();
         String bookName = intent.getStringExtra("bookName");
         String author = intent.getStringExtra("author");
@@ -65,6 +75,30 @@ public class BookCopyActivity extends AppCompatActivity {
         categoryId.setText(category);
 
         searchBookCopy("copy",id);
+
+        //Nhận thông báo khi có sách
+        builder = new AlertDialog.Builder(this);
+        btnNotifyReceive.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                builder.setTitle(R.string.announce)
+                        .setMessage("Nhận thông báo khi có sách: " + bookName)
+                        .setCancelable(true)
+                        .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                reserveBook(userID,id);
+                            }
+                        })
+                        .setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .show();
+            }
+        });
 
         // Nút back
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +147,28 @@ public class BookCopyActivity extends AppCompatActivity {
             public void onFailure(Call<infoResponse.searchCopyList> call, Throwable t) {
                 t.printStackTrace();
             }
+        });
+    }
+
+    // Đặt thông báo khi có sách
+    public void reserveBook (String userID, String bookID)
+    {
+        ApiService.apiservice.reserveBook(userID, bookID).enqueue(new Callback<infoResponse.rsvnBook>() {
+            @Override
+            public void onResponse(Call<infoResponse.rsvnBook> call, Response<infoResponse.rsvnBook> response) {
+                if (response.isSuccessful()) {
+                    String status = response.body().getStatus();
+                    if(status.equals("success")) {
+                        Toast.makeText(BookCopyActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                    } else if (status.equals("available")) {
+                        Toast.makeText(BookCopyActivity.this, "Sách đang có sẵn ở thư viện", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(BookCopyActivity.this, R.string.error_occurred, Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<infoResponse.rsvnBook> call, Throwable t) {          }
         });
     }
 

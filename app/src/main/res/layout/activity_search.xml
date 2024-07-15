@@ -25,7 +25,7 @@
             android:id="@+id/caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="16sp"
             android:padding="10dp"
             android:text="Tìm kiếm theo: "/>
 
@@ -37,7 +37,7 @@
                 android:id="@+id/tv_selected"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:padding="10dp"
                 android:backgroundTint="#7EC17503"
                 android:textAlignment="center"

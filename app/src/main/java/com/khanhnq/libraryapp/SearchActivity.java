@@ -101,7 +101,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onResponse(Call<infoResponse.searchTitleList> call, Response<infoResponse.searchTitleList> response) {
                 if (response.isSuccessful()) {
                     infoResponse.searchTitleList list = response.body();
-                    if (list == null || list.getList().isEmpty()) {
+                    if (list == null || list.getList() == null || list.getList().isEmpty()) {
                         Toast.makeText(SearchActivity.this, "Không tìm thấy dữ liệu!", Toast.LENGTH_SHORT).show();
                     }
                     else {

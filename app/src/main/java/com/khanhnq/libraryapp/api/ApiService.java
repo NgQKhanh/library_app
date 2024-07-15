@@ -16,12 +16,13 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface ApiService {
+
     Gson gson = new GsonBuilder()
             .setLenient()
             .setDateFormat("yyyy-MM-dd HH:mm:ss")
             .create();
     ApiService apiservice = new Retrofit.Builder()
-            .baseUrl("http://192.168.0.105:3000/app/")
+            .baseUrl("http://192.168.1.4:3000/app/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(ApiService.class);
@@ -30,14 +31,30 @@ public interface ApiService {
     Call<loginResponse> loginAuth(@Body loginPost loginData);
     @POST("getBBList")
     Call<infoResponse.BBList> getBorBookInfo (@Body getInfoPost getInfopost);
-    @POST("getRsvnInfo")
-    Call<infoResponse.RsvnInfo> getReservationInfo (@Body getInfoPost getInfopost);
-    @POST("reservation")
-    Call<infoResponse.confirmRsvn> confirmRsvn (@Body getInfoPost.reservationPost reservationPost);
     @GET("getRRInfo")
     Call<infoResponse.RRInfo> getReadingRoomInfo ();
+
+    // API đặt chỗ ngồi
+    @GET("getRsvnCountInPeriod")
+    Call<infoResponse.RsvnInfo.RsvnInPeriod> getRsvnInPeriod (
+            @Query("room") int room
+    );
+    @GET("getUserSeatRsvn")
+    Call<infoResponse.RsvnInfo.UserReservation> getUserRsvn(
+            @Query("userID") String userID
+    );
+    @GET("getSeatRsvnByRoom")
+    Call<infoResponse.bookingSeat> getRsvnSeat(
+            @Query("date") String date,
+            @Query("shift") int shift,
+            @Query("room") int room
+    );
+    @POST("cfrRsvn")
+    Call<infoResponse.confirmRsvn> confirmRsvn (@Body getInfoPost.reservationPost reservationPost);
     @POST("delrsvn")
     Call<Void> delRsvn (@Body getInfoPost getInfopost);
+
+    //API tra cứu
     @GET("search")
     Call<infoResponse.searchTitleList> searchBook(
             @Query("type") String type,
@@ -49,11 +66,12 @@ public interface ApiService {
             @Query("type") String type,
             @Query("id") String id
     );
-    @GET("getBookingSeat")
-    Call<infoResponse.bookingSeat> getBookingSeat(
-            @Query("date") String date,
-            @Query("shift") int shift,
-            @Query("room") int room
+
+    //API đặt sách
+    @GET("reserveBook")
+    Call<infoResponse.rsvnBook> reserveBook(
+            @Query("userID") String userID,
+            @Query("bookID") String bookID
     );
 }
 

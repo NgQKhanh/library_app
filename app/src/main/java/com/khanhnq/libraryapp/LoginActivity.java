@@ -1,7 +1,11 @@
 package com.khanhnq.libraryapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.khanhnq.libraryapp.api.ApiService;
 import com.khanhnq.libraryapp.model.loginResponse;
 import com.khanhnq.libraryapp.model.loginPost;
@@ -59,19 +63,21 @@ public class LoginActivity extends AppCompatActivity {
         ApiService.apiservice.loginAuth(postData).enqueue(new Callback<loginResponse>() {
             @Override
             public void onResponse(Call<loginResponse> call, Response<loginResponse> response) {
-                loginResponse result = response.body();
-                if((result != null)&&(result.isStatus())){
+                if (response.isSuccessful()) {
+                    loginResponse result = response.body();
+                    if (result != null) {
 
-                    // Đăng nhập thành công, lấy dữ liệu
-                    Common user = (Common) getApplication();
-                    user.setUserID(result.getUserID());
-                    user.setUsername(result.getUsername());
-                    user.setLogin(true);
+                        // Đăng nhập thành công, lấy dữ liệu
+                        Common user = (Common) getApplication();
+                        user.setUserID(result.getUserID());
+                        user.setUsername(result.getUsername());
+                        user.setLogin(true);
 
-                    // CHuyển hướng sang trang chủ
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                        // CHuyển hướng sang trang chủ
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
                 else{
                     Toast.makeText(LoginActivity.this,"Sai tên đăng nhập hoặc mật khẩu", Toast.LENGTH_SHORT).show();

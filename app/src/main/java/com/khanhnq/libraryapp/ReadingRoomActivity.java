@@ -22,7 +22,7 @@ import retrofit2.Response;
 public class ReadingRoomActivity extends AppCompatActivity {
 
     ImageView btnBack;
-    TextView title, RR1_Num;
+    TextView title, RR1_Num, RR2_Num;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +33,13 @@ public class ReadingRoomActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.back_icon);
         title = findViewById(R.id.toolbarTitle);
         RR1_Num = findViewById(R.id.RR1_Num);
+        RR2_Num = findViewById(R.id.RR2_Num);
         title.setText("Phòng đọc");
 
         //Hiển thị thông tin
-        getReadingRoomInfo();
+        //getReadingRoomInfo();
+        RR1_Num.setText("Còn trống: 10/30");
+        RR2_Num.setText("Còn trống: 20/40");
 
         // nút back
         btnBack.setOnClickListener(new View.OnClickListener() {

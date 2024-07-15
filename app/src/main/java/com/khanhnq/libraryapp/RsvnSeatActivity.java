@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +28,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BookSeatActivity extends AppCompatActivity {
+public class RsvnSeatActivity extends AppCompatActivity {
     ImageView selectedSeat, btnBack;
     TextView title, selectedSeatText;
     Button btnConfirm;
@@ -107,10 +106,10 @@ public class BookSeatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(selectedSeat == null ) {
-                    Toast.makeText(BookSeatActivity.this, "Chưa chọn chỗ ngồi", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RsvnSeatActivity.this, "Chưa chọn chỗ ngồi", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Intent intent = new Intent(BookSeatActivity.this, ConfirmBookingSeatActivity.class);
+                    Intent intent = new Intent(RsvnSeatActivity.this, ConfirmBookingSeatActivity.class);
                     intent.putExtra("date",  selectedDate);
                     intent.putExtra("shift", selectedShift);
                     intent.putExtra("chair", selectedChair);
@@ -222,13 +221,13 @@ public class BookSeatActivity extends AppCompatActivity {
     //Lấy thông tin chỗ ngồi của phòng
     public void getBookingInfo (String date, int shift, int room)
     {
-        ApiService.apiservice.getBookingSeat(date, shift, room).enqueue(new Callback<infoResponse.bookingSeat>() {
+        ApiService.apiservice.getRsvnSeat(date, shift, room).enqueue(new Callback<infoResponse.bookingSeat>() {
             @Override
             public void onResponse(Call<infoResponse.bookingSeat> call, Response<infoResponse.bookingSeat> response) {
                 if (response.isSuccessful()) {
                     infoResponse.bookingSeat list = response.body();
                     if (list == null) {
-                        Toast.makeText(BookSeatActivity.this, R.string.data_not_found, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RsvnSeatActivity.this, R.string.data_not_found, Toast.LENGTH_SHORT).show();
                     } else {
                         naSeats = list.getList();
                     };

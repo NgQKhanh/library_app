@@ -40,25 +40,35 @@ public class infoResponse {
         }
     }
 
-    //Lấy thông tin đặt chỗ
+    //Lấy thông tin đặt chỗ của phòng
     public class RsvnInfo{
-        private List<String> dateArray;
-        private List<Integer> shift1Array;
-        private List<Integer> shift2Array;
-        private userReservation userReservation;
-        public List<String> getDateArray() {return dateArray;}
-        public List<Integer> getShift1Array() {return shift1Array;}
-        public List<Integer> getShift2Array() {return shift2Array;}
-        public userReservation getUserReservation() {return userReservation; }
-        public class userReservation{
-            private List<Reservation> rsvn;
-            public List<Reservation> getRsvn() { return rsvn;}
+
+        private UserReservation userReservation;
+        private RsvnInPeriod rsvnInPeriod;
+        public UserReservation getUserReservation() {return userReservation; }
+        public RsvnInPeriod getRsvnInPeriod() {return rsvnInPeriod; }
+        public class UserReservation{
+            private List<Reservation> uSeats;
+            public List<Reservation> getRsvn() { return uSeats;}
             public class Reservation {
                 private String date;
                 private String shift;
+                private int seat;
+                private String room;
                 public String getDate() { return date; }
                 public String getShift() { return shift; }
+                public int getSeat() { return seat; }
+                public String getRoom() { return room; }
             }
+        }
+        public class RsvnInPeriod{
+            private List<String> dateArray;
+            private List<Integer> shift1Array;
+            private List<Integer> shift2Array;
+            public List<String> getDateArray() {return dateArray;}
+            public List<Integer> getShift1Array() {return shift1Array;}
+            public List<Integer> getShift2Array() {return shift2Array;}
+
         }
     }
 
@@ -109,11 +119,18 @@ public class infoResponse {
         }
     }
 
-    // Tìm kiếm bản copy
+    // Đặt chỗ ngồi
     public class bookingSeat{
         private List<Integer> seats;
         public List<Integer> getList() {return seats;}
+    }
 
+    // Đặt thông báo sách
+    public class rsvnBook{
+        private String message;
+        public String getStatus() {
+            return message;
+        }
     }
 }
 

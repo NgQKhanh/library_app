@@ -21,4 +21,14 @@ public class getInfoPost {
             this.room = room;
         }
     }
+    public static class rsvnCountPost{
+        private String date;
+        private int shift;
+        private String room;
+        public rsvnCountPost(String date, int shift, String room) {
+            this.date = date;
+            this.shift = shift;
+            this.room = room;
+        }
+    }
 }

@@ -64,4 +64,10 @@
         android:textSize="18dp"
         android:layout_margin="20dp"/>
         />
+
+<!--    <TextView-->
+<!--        android:id="@+id/token"-->
+<!--        android:layout_below="@id/btnlogin"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"/>-->
 </RelativeLayout>

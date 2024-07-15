@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/search_search_bar">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/tv_selected"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:padding="10dp"
-        android:backgroundTint="#7EC17503"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:background="@drawable/search_search_bar"/>
-
+        android:background="#3018738F"
+        android:drawableRight="@drawable/main_icon_readingroom"
+        android:text="TextView"/>
 </RelativeLayout>
