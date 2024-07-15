@@ -29,8 +29,10 @@ public interface ApiService {
 
     @POST("login")
     Call<loginResponse> loginAuth(@Body loginPost loginData);
-    @POST("getBBList")
-    Call<infoResponse.BBList> getBorBookInfo (@Body getInfoPost getInfopost);
+    @GET("getBBList")
+    Call<infoResponse.BBList> getBorBookInfo (
+            @Query("userID") String userID
+    );
     @GET("getRRInfo")
     Call<infoResponse.RRInfo> getReadingRoomInfo ();
 

@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class RsvnSeatActivity extends AppCompatActivity {
     private int lastAction;
     int selectedChair = 0, selectedTable = 0;
     List<Integer> naSeats = new ArrayList<>();
+    List<Integer> naList = new ArrayList<>();
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,11 +67,10 @@ public class RsvnSeatActivity extends AppCompatActivity {
         setupTableSet(R.id.table_set_3);
         setupTableSet(R.id.table_set_4);
 
-        naSeats.add(102);
-        naSeats.add(310);
-        naSeats.add(401);
-
-        setNonAvaiSeats(naSeats);
+//        naSeats.add(102);
+//        naSeats.add(310);
+//        naSeats.add(401);
+        getBookingInfo ( selectedDate, selectedShift, selectedRoom);
 
         // Dragable bản đồ
         map.setOnTouchListener((view, event) -> {
@@ -99,8 +100,6 @@ public class RsvnSeatActivity extends AppCompatActivity {
             }
             return true;
         });
-
-        getBookingInfo ( selectedDate, selectedShift, selectedRoom);
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,6 +229,7 @@ public class RsvnSeatActivity extends AppCompatActivity {
                         Toast.makeText(RsvnSeatActivity.this, R.string.data_not_found, Toast.LENGTH_SHORT).show();
                     } else {
                         naSeats = list.getList();
+                        setNonAvaiSeats(naSeats);
                     };
                 }
             }

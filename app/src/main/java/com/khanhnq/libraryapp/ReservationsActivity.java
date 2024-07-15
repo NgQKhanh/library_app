@@ -133,7 +133,7 @@ public class ReservationsActivity extends AppCompatActivity {
             dropList_roomToRsvn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
-                    selectedRoom = i+1;
+                    selectedRoom = i;
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {

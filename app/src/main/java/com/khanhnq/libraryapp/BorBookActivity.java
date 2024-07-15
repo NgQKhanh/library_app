@@ -58,8 +58,7 @@ public class BorBookActivity extends AppCompatActivity {
 
     // HTTP POST: lấy thông tin sách mượn của ngươi dùng
     private void getBorrowedBookInfo(String userID){
-        getInfoPost postData = new getInfoPost(userID);
-        ApiService.apiservice.getBorBookInfo(postData).enqueue(new Callback<infoResponse.BBList>() {
+        ApiService.apiservice.getBorBookInfo(userID).enqueue(new Callback<infoResponse.BBList>() {
             @Override
             public void onResponse(Call<infoResponse.BBList> call, Response<infoResponse.BBList> response) {
                 infoResponse.BBList list = response.body();
@@ -67,8 +66,8 @@ public class BorBookActivity extends AppCompatActivity {
                 List<infoResponse.BBList.BorrowedBook> borBookList = list.getBorrowedBookList();
                 for (infoResponse.BBList.BorrowedBook book : borBookList) {
                     String bookName = book.getBookName();
-                    String borrowDate = formatDate(book.getBorrowDate());
-                    String dueDate = formatDate(book.getDueDate());
+                    String borrowDate = book.getBorrowDate();
+                    String dueDate = book.getDueDate();
 
                     addRowBBTable(count, bookName, borrowDate, dueDate);
                     count++;
